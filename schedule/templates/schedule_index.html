@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block style %}
+    <link rel="stylesheet" href="/static/css/schedule/schedule_index.css">
+    <script src="/static/js/schedule/schedule_index.js"></script>
+{% endblock %}
+{% block head %}
+    <div class="row">
+        <div class="col-lg-3 col-md-2 col-sm-2 col-xs-1"></div>
+        <div class="col-lg-6 col-md-8 col-sm-8 col-xs-10">
+
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{% url "schedule:schedule_index" %}">首页</a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="{% url "schedule:schedule_list" %}">列表</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+        </div>
+    </div>
+{% endblock %}
+{% block center %}
+    <div class="row">
+        <div class="col-lg-4 col-md-3 col-sm-3 col-xs-1"></div>
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-10">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <input type="text" class="form-control" id="time" name="time" value="{{ today }}" placeholder="时间">
+                    </div>
+                </div>
+
+                {% for scheduletype in scheduletypes %}
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" class="schedule_type" name="type" id="{{ scheduletype.stp_id }}">{{ scheduletype.stp_type }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </form>
+        </div>
+    </div>
+{% endblock %}
