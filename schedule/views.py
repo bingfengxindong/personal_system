@@ -6,7 +6,7 @@ import datetime
 
 class ScheduleIndexHandler(View):
     def get(self,request):
-        scheduletypes = ScheduleType.all_scheduletype()
+        scheduletypes = ScheduleType.objects.all()
         context = {
             "title":"首页",
             "today":datetime.datetime.today().strftime("%Y-%m-%d"),
@@ -16,8 +16,8 @@ class ScheduleIndexHandler(View):
 
 class ScheduleListHandler(View):
     def get(self,request):
-        scheduletypes = ScheduleType.all_scheduletype()
-        scheduletimes = ScheduleTime.all_scheduletime().order_by("-pk")
+        scheduletypes = ScheduleType.objects.all()
+        scheduletimes = ScheduleTime.objects.all().order_by("-pk")
         context = {
             "title":"列表",
             "scheduletypes":scheduletypes,

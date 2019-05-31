@@ -7,7 +7,7 @@ class ScheduleTimeAddHandler(View):
         st_time = request.POST.get("st_time")
         stp_pk = request.POST.get("stp_pk")
         stp_action = request.POST.get("stp_action")
-        scheduletype = ScheduleType.get_scheduletype(stp_pk=stp_pk)
+        scheduletype = ScheduleType.objects.get(stp_id=stp_pk)
         ScheduleTime.add_scheduletime(time=st_time,type=scheduletype,stp_action=stp_action)
         return HttpResponse("OK")
 

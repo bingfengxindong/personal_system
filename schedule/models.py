@@ -19,10 +19,6 @@ class ScheduleTime(models.Model):
         verbose_name_plural = "计划时间表"
 
     @staticmethod
-    def all_scheduletime():
-        return ScheduleTime.objects.all()
-
-    @staticmethod
     def add_scheduletime(**kwargs):
         scheduletimes = ScheduleTime.objects.filter(st_time=kwargs["time"])
         if not scheduletimes.exists():
@@ -37,11 +33,8 @@ class ScheduleTime(models.Model):
     @staticmethod
     def get_scheduletype_exist(**kwargs):
         scheduletimes = ScheduleTime.objects.filter(st_time=kwargs["time"])
-        if scheduletimes.exists():
-            if scheduletimes[0].st_type.filter(stp_id=kwargs["stp_pk"]).exists():
-                ste = "y"
-            else:
-                ste = "n"
+        if scheduletimes.exists() and scheduletimes[0].st_type.filter(stp_id=kwargs["stp_pk"]).exists():
+            ste = "y"
         else:
             ste = "n"
         return ste
@@ -60,11 +53,3 @@ class ScheduleType(models.Model):
         ordering = ["pk"]
         verbose_name = "计划类型表"
         verbose_name_plural = "计划类型表"
-
-    @staticmethod
-    def all_scheduletype():
-        return ScheduleType.objects.all()
-
-    @staticmethod
-    def get_scheduletype(**kwargs):
-        return ScheduleType.objects.get(stp_id=kwargs["stp_pk"])
